@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle}">Home - My Website</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #f0f2f5;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            margin: 0;
+        }
+        .btn {
+            padding: 10px 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-logout { background-color: #e74c3c; }
+        .btn-logout:hover { background-color: #c0392b; }
+        .btn-tambah { background-color: #2ecc71; display: inline-block; margin-bottom: 20px;}
+        .btn-tambah:hover { background-color: #27ae60; }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #34495e;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1 th:text="${pageTitle}">Daftar Mahasiswa</h1>
+        <a th:href="@{/logout}" class="btn btn-logout">Logout</a>
+    </div>
+
+    <a th:href="@{/form}" class="btn btn-tambah">+ Tambah Data User</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama Lengkap</th>
+                <th>NIM</th>
+                <th>Jenis Kelamin</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop data user jika tidak kosong -->
+            <tr th:each="user, status : ${users}" th:if="${!users.isEmpty()}">
+                <td th:text="${status.count}">1</td>
+                <td th:text="${user.nama}">Budi</td>
+                <td th:text="${user.nim}">20230000000</td>
+                <td th:text="${user.jenisKelamin}">Laki-laki</td>
+            </tr>
+            <!-- Tampilan jika kosong -->
+            <tr th:if="${users.isEmpty()}">
+                <td colspan="4" class="empty-state">Belum ada data! Silakan tambahkan.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

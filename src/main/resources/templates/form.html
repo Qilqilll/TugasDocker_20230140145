@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Input User</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        h2 {
+            color: #2c3e50;
+            margin-top: 0;
+            border-bottom: 2px solid #f0f2f5;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #34495e;
+            font-weight: 500;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-family: inherit;
+            background-color: white;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        .btn {
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            border: none;
+            flex: 1;
+            transition: 0.3s;
+            text-align: center;
+            text-decoration: none;
+        }
+        .btn-submit {
+            background-color: #3498db;
+            color: white;
+        }
+        .btn-submit:hover { background-color: #2980b9; }
+        .btn-cancel {
+            background-color: #95a5a6;
+            color: white;
+        }
+        .btn-cancel:hover { background-color: #7f8c8d; }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Tambah Data Mahasiswa</h2>
+    
+    <form th:action="@{/submit}" th:object="${user}" method="post">
+        
+        <div class="form-group">
+            <label for="nama">Nama Lengkap</label>
+            <input type="text" id="nama" th:field="*{nama}" placeholder="Masukkan nama" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="nim">Nomor Induk Mahasiswa (NIM)</label>
+            <input type="text" id="nim" th:field="*{nim}" placeholder="Masukkan NIM" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="jenisKelamin">Jenis Kelamin</label>
+            <select id="jenisKelamin" th:field="*{jenisKelamin}">
+                <option value="Laki-laki">Laki-laki</option>
+                <option value="Perempuan">Perempuan</option>
+            </select>
+        </div>
+
+        <div class="btn-group">
+            <a th:href="@{/home}" class="btn btn-cancel">Batal</a>
+            <button type="submit" class="btn btn-submit">Simpan Data</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
